@@ -1,0 +1,7 @@
+<%= form_with model: @order, local:true do |f| %>
+<h4>支払方法</h4>
+  <%= f.radio_button :payment_method, :credit_card %>
+  <%= f.label :payment_method, "クレジットカート", {value: :credit, style: "display: inline-block;"} %>
+  <%= f.radio_button :payment_method, :transfer %>
+  <%= f.label :payment_method, "銀行振込", {value: :transfer , style: "display: inline-block;"} %>
+<% end %>

@@ -1,0 +1,20 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<h2>商品一覧</h2>
+<% @items.each do |item| %>
+<div>
+  <%= link_to item_path(item.id) do %>
+ <p><%= attachment_image_tag item, :image %></p>
+  <% end %>
+  <p>商品: <%= item.name%></p>
+  <p>￥：<%= item.price %></p>
+</div>
+<% end %>
+
+<%= form_with model: @cart_item do |f| %>
+<%= f.select :faculty, [["1", "1"],["2", "2"]], include_blank: "個数選択" %>
+<%=link_to cart_items_path do %>
+<%= f.submit 'カートに入れる' %>
+<% end %>
+<% end %>

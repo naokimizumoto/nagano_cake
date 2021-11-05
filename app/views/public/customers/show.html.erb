@@ -1,0 +1,40 @@
+<h4>マイページ</h4>
+<p>登録情報</p>
+<%= link_to "編集する", edit_customer_path %>
+
+<%= form_with model: @costomer,local:true do |f|>
+ <table>
+
+  <tbody>
+    <tr>
+      <td>氏名</td>
+      <td><%= @costomer.name%></td>
+    </tr>
+    <tr>
+      <td>カナ</td>
+      <td><%= @costomer.kana%></td>
+    </tr>
+    <tr>
+      <td>郵便番号</td>
+      <td><%= @costomer.postal_code%></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td><%= @costomer.address%></td>
+    </tr>
+    <tr>
+      <td>電話番号</td>
+      <td><%= @costomer.telephone_number%></td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= @costomer.email%></td>
+    </tr>
+  </tbody>
+
+ </table>
+<% end %>
+<p>配送先</p>
+<%= link_to "一覧を見る", addresses_path %>
+<p>注文履歴</p>
+<%= link_to "一覧を見る", orders_path %>
