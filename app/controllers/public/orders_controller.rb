@@ -1,19 +1,29 @@
 class Public::OrdersController < ApplicationController
   def new
+    @order = Order.new
   end
-  
+
   def verification
+    @orders = Order.all
   end
-  
-  def thanks 
-  end 
-  
+
+  def thanks
+
+  end
+
   def create
-  end 
-  
+    @order = Order.find(params[:id])
+    if @order.save(order_params)
+      redirect_to orders_thanks_path
+    end
+  end
+
   def index
-  end 
+    @orders = Order.all
+  end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.find(params[:id])
   end
 end

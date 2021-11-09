@@ -1,0 +1,45 @@
+<h4>注文情報確認</h4>
+<table>
+  <thead>
+    <tr>商品名</tr>
+    <tr>単価（税込）</tr>
+    <tr>数量</tr>
+    <tr>小計</tr>
+  </thead>
+  <tbody>
+    <%= @orders.each do |order|%>
+    <tr>
+       <td><%= order.name%></td>
+       <td><%= order.order_details.price%></td>
+       <td><%= order.order_details.amount%></td>
+       <td><%= order.order_details.price*order.order_details.amount%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+     <%= @orders.each do |order|%>
+    <tr>
+      <td>送料</td>
+      <td><%= order.shipping_cost %></td>
+    </tr>
+    <tr>
+      <td>商品合計</td>
+      <td><%= order.order_details.price*order.order_details.amount%></td>
+    </tr>
+    <tr>
+      <td>請求金額</td>
+      <td><%= (order.order_details.price*order.order_details.amount)+ (order.shipping_cost) %></td>
+    </tr>
+     <% end %>
+  </tbody>
+</table>
+
+<h4>支払方法</h4>
+<%= @order.payment_method%>
+<h4>お届け先</h4>
+<%= @order.address%>
+
+<%= link_to "注文を確定する", orders_thanks_path %>

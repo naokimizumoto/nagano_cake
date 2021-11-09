@@ -1,18 +1,18 @@
 <h4>マイページ</h4>
 <p>登録情報</p>
-<%= link_to "編集する", edit_customer_path %>
+<%= link_to "編集する", edit_customer_path(@customer.id) %>
 
-<%= form_with model: @costomer,local:true do |f|>
+
  <table>
-
   <tbody>
+    <%= @customer.each do |customer|%>
     <tr>
       <td>氏名</td>
-      <td><%= @costomer.name%></td>
+      <td><%= @costomer.fullname%></td>
     </tr>
     <tr>
       <td>カナ</td>
-      <td><%= @costomer.kana%></td>
+      <td><%= @costomer.first_name_kana%><%= @costomer.last_name_kana%></td>
     </tr>
     <tr>
       <td>郵便番号</td>
@@ -30,10 +30,10 @@
       <td>メールアドレス</td>
       <td><%= @costomer.email%></td>
     </tr>
+    <% end %>
   </tbody>
-
  </table>
-<% end %>
+
 <p>配送先</p>
 <%= link_to "一覧を見る", addresses_path %>
 <p>注文履歴</p>

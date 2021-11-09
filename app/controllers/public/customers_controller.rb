@@ -1,18 +1,31 @@
 class Public::CustomersController < ApplicationController
   def show
-    @costomer = Costomer.find(params[:id])
-  end 
-  
-  def edit 
-    
-  end 
-  
+    @customer = Customer.find(params[:id])
+  end
+
+  def edit
+    @customer = Customer.find(params[:id])
+
+  end
+
   def updated
-  end 
-  
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      redirect_to customer_path(@customer.id)
+    end
+  end
+
   def withdraw
-  end 
-  
+    @customer = Customer.find(params[:id])
+  end
+
   def withdraw_update
-  end 
+    @customer = Customer.find(params[:id])
+
+  end
+
+  private
+  def customer_params
+    params.require(:customer).permit(:fullname,:first_name_kana,:last_name_kana,:postal_code,:telephone_number,:address,:email)
+  end
 end
