@@ -1,34 +1,34 @@
 <h4>会員情報編集</h4>
 
-<%= form_with model: @costomer,local:true do |f|>
+<%= form_with model: @customer,local:true do |f| %>
  <table>
 
   <tbody>
     <tr>
       <td>氏名</td>
-      <td><%= @costomer.last_name%></td>
-      <td><%= @costomer.first_name%></td>
+      <td><%= @customer.last_name %></td>
+      <td><%= @customer.first_name %></td>
     </tr>
     <tr>
       <td>カナ</td>
-      <td><%= @costomer.last_name_kana%></td>
-      <td><%= @costomer.first_name_kana%></td>
+      <td><%= @customer.last_name_kana%></td>
+      <td><%= @customer.first_name_kana%></td>
     </tr>
     <tr>
       <td>郵便番号</td>
-      <td><%= @costomer.postal_code%></td>
+      <td><%= @customer.postal_code%></td>
     </tr>
     <tr>
       <td>住所</td>
-      <td><%= @costomer.address%></td>
+      <td><%= @customer.address%></td>
     </tr>
     <tr>
       <td>電話番号</td>
-      <td><%= @costomer.telephone_number%></td>
+      <td><%= @customer.telephone_number%></td>
     </tr>
     <tr>
       <td>メールアドレス</td>
-      <td><%= @costomer.email%></td>
+      <td><%= @customer.email%></td>
     </tr>
   </tbody>
 
