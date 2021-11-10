@@ -3,13 +3,15 @@
 <%= link_to "編集する", customers_edit_path %>
 
 
- <table>
+ <table border="1">
   <tbody>
     <tr>
+
       <td>氏名</td>
       <td><%= @customer.fullname%></td>
     </tr>
     <tr>
+
       <td>カナ</td>
       <td><%= @customer.first_name_kana%><%= @customer.last_name_kana%></td>
     </tr>

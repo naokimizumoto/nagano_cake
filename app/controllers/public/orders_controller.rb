@@ -1,9 +1,11 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
+    @address = Address.new
+    @addresses = Address.all
   end
 
-  def verification
+  def verification #ifの分岐
     @orders = Order.all
   end
 
