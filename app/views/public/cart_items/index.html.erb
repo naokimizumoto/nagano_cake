@@ -1,6 +1,6 @@
   <h4>ショッピングカート</h4>
 
-  <%= link_to "カートを空にする",cart_items_path, method: :delete %>
+  <%= link_to "カートを空にする",cart_items_destroy_all_path, method: :delete %>
 
 
    <table>
@@ -18,9 +18,9 @@
        <tr>
          <td><%= cart_item.item.name%></td>
          <td><%= cart_item.item.price%></td>
-         <td><%= cart_item.item.amount%><%= link_to "変更", cart_items_path%></td>
-         <td><%= cart_item.price*cart_item.amount%></td>
-         <td><%= link_to "削除する", cart_items_path, method: :delete %></td>
+         <td><%= cart_item.amount%><%= link_to "変更", cart_items_path%></td>
+         <td><%= cart_item.item.price*cart_item.amount%></td>
+         <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete %></td>
        </tr>
         <% end %>
      </tbody>

@@ -12,9 +12,4 @@
 </div>
 <% end %>
 
-<%= form_with model: @cart_item do |f| %>
-<%= f.select :faculty, [["1", "1"],["2", "2"]], include_blank: "個数選択" %>
-<%=link_to cart_items_path do %>
-<%= f.submit 'カートに入れる' %>
-<% end %>
-<% end %>
+

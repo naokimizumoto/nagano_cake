@@ -1,18 +1,11 @@
 <h4>注文情報入力</h4>
 
-<%= form_with model: @order, local:true do |f| %>
+<%= form_with model: @order,url: orders_verification_path, local:true do |f| %>
 <h4>支払方法</h4>
   <%= f.radio_button :payment_method, :credit_card %>
   <%= f.label :payment_method, "クレジットカート", {value: :credit, style: "display: inline-block;"} %>
   <%= f.radio_button :payment_method, :transfer %>
   <%= f.label :payment_method, "銀行振込", {value: :transfer , style: "display: inline-block;"} %>
-  <h4>お届け先</h4>
-  <%= f.radio_button :@order.customer.address, %>
-  <%= f.label :payment_method, "クレジットカート", {value: :credit, style: "display: inline-block;"} %>
-  <%= f.radio_button :payment_method, :transfer %>
-  <%= f.label :payment_method, "銀行振込", {value: :transfer , style: "display: inline-block;"} %>
-   <%= f.radio_button :payment_method, :transfer %>
-  <%= f.label :payment_method, "銀行振込", {value: :transfer , style: "display: inline-block;"} %>
-<% end %>
 
-<%= link_to "確認画面へ進む", orders_verification_path %>
+<%= f.submit "確認画面へ進む"%>
+<% end %>

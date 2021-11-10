@@ -33,13 +33,16 @@
       <td>請求金額</td>
       <td><%= (order.order_details.price*order.order_details.amount)+ (order.shipping_cost) %></td>
     </tr>
+    <tr>
+      <td>支払方法</td>
+        <%= order.payment_method%>
+      <td>お届け先</td>
+        <%= @order.address%>
+    </tr>
      <% end %>
   </tbody>
 </table>
 
-<h4>支払方法</h4>
-<%= @order.payment_method%>
-<h4>お届け先</h4>
-<%= @order.address%>
+
 
 <%= link_to "注文を確定する", orders_thanks_path %>

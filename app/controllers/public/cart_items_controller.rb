@@ -1,14 +1,18 @@
 class Public::CartItemsController < ApplicationController
   def index
-   @cart_items = Cartitem.all
+   @cart_items = CartItem.all
+
   end
 
-　def create
-　  @item = Item.find(params{:id})
-　  if @item.save(item_params)
-　    redirect_to cart_items_path
-　  end
-　end
+  def create
+    @cart_item = CartItem.new(cart_item_params)
+    puts "------------"
+    p @cart_item
+    puts "------------"
+    if @cart_item.save!
+      redirect_to cart_items_path
+    end
+  end
 
 
   def updated
@@ -28,17 +32,17 @@ class Public::CartItemsController < ApplicationController
   def destroy_all
     @cart_items = CartItem.all
     if @cart_items.destroy_all
-      redirect_to cart_items_patj
+      redirect_to cart_items_path
     end
   end
-private
+ private
 
-def item_params
+ def item_params
   params.require(:cart_item).permit(:amount)
-end
+ end
 
-def cart_item_params
-  params.require(:cart_item).permit(:amount)
-end
+  def cart_item_params
+  params.require(:cart_item).permit(:amount,:item_id,:customer_id)
+  end
 
 end
