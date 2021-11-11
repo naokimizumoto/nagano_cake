@@ -1,11 +1,36 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
-    @address = Address.new
-    @addresses = Address.all
+
+    @addresses = current_customer.addresses
   end
 
-  def verification #ifの分岐
+  def verification
+     @order = Order.new
+     @order.payment_method = params[:order][:payment_method]
+
+    if params[:order][:address_select] == "1"
+      @order.address = current_customer.address
+      @order.name = current_customer.fullname
+      @order.postal_code = current_customer.postal_code
+
+    elsif params[:order][:address_select] == "2"
+      @select_address = Address.find(params[:order][:select_address])
+      @order.address = @select_address.address
+      @order.postal_code = @select_address.postal_code
+      @order.name = @select_address.name
+
+    elsif params[:order][:address_select] == "3"
+      @order.address = params[:order][:address]
+      @order.postal_code = params[:order][:postal_code]
+      @order.name = params[:order][:name]
+      address = Address.new
+      address.address = params[:order][:address]
+      address.postal_code = params[:order][:postal_code]
+      address.name = params[:order][:name]
+      address.customer_id = current_customer.id
+      address.save
+    end
     @orders = Order.all
   end
 
@@ -14,7 +39,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.find(params[:id])
+    @order = Order.new
     if @order.save(order_params)
       redirect_to orders_thanks_path
     end
@@ -27,5 +52,8 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = OrderDetail.find(params[:id])
+  end
+  private
+  def order_params
   end
 end

@@ -4,7 +4,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer =current_customer
 
   end
 
@@ -16,7 +16,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def withdraw_update

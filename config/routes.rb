@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  scope module: :public do
+   get 'customers/edit' => 'customers#edit'
+  end
   devise_for :customers, controllers: {
     sessions: 'public/sessions',
     passwords: 'public/passwords',
@@ -23,7 +26,6 @@ Rails.application.routes.draw do
      get 'about' => 'homes#about'
      resources :items, only: [:index, :show]
      get 'customers' => 'customers#show'
-     get 'customers/edit' => 'customers#edit'
      patch 'customers' => 'customers#update'
      get 'customers/withdraw' => 'customers#withdraw'
      patch 'customers/withdraw_update' => 'customers#withdsraw_update'

@@ -20,29 +20,34 @@
 
 <table>
   <tbody>
-     <%= @orders.each do |order|%>
     <tr>
       <td>送料</td>
-      <td><%= order.shipping_cost %></td>
+      <td><%= @order.shipping_cost %></td>
     </tr>
     <tr>
       <td>商品合計</td>
-      <td><%= order.order_details.price*order.order_details.amount%></td>
+      <td><%#=@order.order_details.price*@order.order_details.amount%></td>
     </tr>
     <tr>
       <td>請求金額</td>
-      <td><%= (order.order_details.price*order.order_details.amount)+ (order.shipping_cost) %></td>
+      <td><%#= (@order.order_details.price*@order.order_details.amount)+ (@order.shipping_cost) %></td>
     </tr>
     <tr>
       <td>支払方法</td>
-        <%= order.payment_method%>
+        <td><%= @order.payment_method%></td>
       <td>お届け先</td>
-        <%= @order.address%>
+       <td><%= @order.address%></td>
+      <td>   <%= @order.postal_code%></td>
+      <td>   <%= @order.name %></td>
     </tr>
-     <% end %>
   </tbody>
 </table>
 
 
 
-<%= link_to "注文を確定する", orders_thanks_path %>
+
+<%= form_with model: @order, url: orders_path, local: true do |f|%>
+<%=hidden_field :customer_id, value: current_customer.id%>
+<%=hidden_field :payment_method, value: @order.payment_metho%>
+<%=hidden_field :postal_code, value: current_customer.id%>
+<%= f.submit "注文を確定する" %>

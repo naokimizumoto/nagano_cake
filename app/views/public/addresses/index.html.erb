@@ -7,6 +7,7 @@
   <%= f.text_field :address %>
   <h4>宛名</h4>
   <%= f.text_field :name %>
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
   <%= f.submit "新規登録" %>
   <% end %>
 

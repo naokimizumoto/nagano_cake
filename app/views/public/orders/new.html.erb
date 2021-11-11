@@ -6,23 +6,21 @@
   <%= f.label :payment_method, "クレジットカート", {value: :credit, style: "display: inline-block;"} %>
   <%= f.radio_button :payment_method, :transfer %>
   <%= f.label :payment_method, "銀行振込", {value: :transfer , style: "display: inline-block;"} %>
-  <% end %>
 <h4>お届け先</h4>
-<%= form_with model: @address,url: orders_verification_path, local:true do |f| %>
 <ul>
   <li>
-    <%= f.radio_button :address, :current_customer%>
-    <%= f.label :address, "ご自身の住所", {value: :address, style: "display: inline-block;"} %>
-    <%= @address.postal_code %><%= current_customer.address%> <%= @address.name%>
+    <%= f.radio_button :address_select, 1%>
+    <%= f.label :address_select, "ご自身の住所", {value: :address, style: "display: inline-block;"} %>
+   〒 <%= current_customer.postal_code %><%= current_customer.address%> <%= current_customer.fullname%>
   </li>
   <li>
-    <%= f.radio_button :address, :current_customer%>
-    <%= f.label :address, "ご自身の住所", {value: :address, style: "display: inline-block;"} %>
-    <%=f.collection_select :address, @addresses, :id, :name, { prompt: "選択してください" } %>
+    <%= f.radio_button :address_select, 2%>
+    <%= f.label :address_select, "登録済住所から選択", {value: :address, style: "display: inline-block;"} %>
+    <%=f.collection_select :select_address, @addresses, :id, :view_dear_address, { prompt: "選択してください" } %>
   </li>
   <li>
-     <%= f.radio_button :address, :current_customer%>
-    <%= f.label :address, "ご自身の住所", {value: :address, style: "display: inline-block;"} %>
+     <%= f.radio_button :address_select, 3%>
+    <%= f.label :address_select, "新しいお届け先", {value: :address, style: "display: inline-block;"} %>
     <table>
       <tr>
         <td>郵便番号（ハイフンなし）</td>
@@ -41,3 +39,4 @@
 </ul>
 <%= f.submit "確認画面へ進む"%>
 <% end %>
+
