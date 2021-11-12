@@ -48,6 +48,12 @@
 
 <%= form_with model: @order, url: orders_path, local: true do |f|%>
 <%=hidden_field :customer_id, value: current_customer.id%>
-<%=hidden_field :payment_method, value: @order.payment_metho%>
-<%=hidden_field :postal_code, value: current_customer.id%>
+<%=hidden_field :payment_method, value: @order.payment_method%>
+<%=hidden_field :postal_code, value: @order.postal_code%>
+<%=hidden_field :name, value: @order.name%>
+<%=hidden_field :shipping_cost, value: @order.shipping_cost%>
+<%=hidden_field :total_payment, value: @order.total_payment%>
+<%=hidden_field :status, value: @order.status%>
+<%=hidden_field :address, value: @order.address%>
 <%= f.submit "注文を確定する" %>
+<% end %>
