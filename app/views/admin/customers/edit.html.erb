@@ -1,8 +1,8 @@
-<%= @customer.last_name%><%= @customer.first_name %><p>さんの会員情報編集</p>
-
-
- <table>
-
+<%= @customer.fullname%>さんの会員情報編集
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+ <table >
   <tbody>
     <%= form_with model: @customer,url: admin_customer_path(@customer.id), local:true do |f|%>
     <tr>
@@ -43,11 +43,18 @@
        <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
       </td>
     </tr>
+    <tr>
+      <td>
+         <%= f.submit "変更を保存", class: "btn btn-success"%>
+      </td>
+    </tr>
+
      <% end %>
   </tbody>
 
  </table>
-
-
-<%= link_to "変更を保存", admin_customer_path(@customer.id)%>
-
+</div>
+<div class="col-lg-6">
+</div>
+ </div>
+</div>

@@ -1,12 +1,15 @@
 <h4>会員一覧</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4"></div>
 
-<table>
-  <thead>
+<table  class="table">
+  <thead class="thead-light">
     <tr>
-    <td>会員ID</td>
-    <td>氏名</td>
-    <td>メールアドレス</td>
-    <td>ステータス</td>
+    <td><strong>会員ID</strong></td>
+    <td><strong>氏名</strong></td>
+    <td><strong>メールアドレス</strong></td>
+    <td><strong>ステータス</strong></td>
     </tr>
   </thead>
 
@@ -16,7 +19,7 @@
           <td><%=customer.id%></td>
           <td>
           <%= link_to admin_customer_path(customer.id) do %>
-            <%=  customer.last_name %><%= customer.first_name %>
+          <%= customer.fullname%>
           <% end %>
           </td>
           <td><%=customer.email%></td>
@@ -29,3 +32,6 @@
       <% end %>
   </tbody>
 </table>
+   <div class="col-lg-4"></div>
+  </div>
+</div>

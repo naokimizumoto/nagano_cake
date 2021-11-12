@@ -1,6 +1,8 @@
-<%= @customer.first_name %><p>さんの会員詳細</p>
-
-<table>
+<%= @customer.fullname %>さんの会員詳細
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+<table class="table table-borderless">
   <tbody>
     <tr>
       <td>会員ID</td>
@@ -41,5 +43,10 @@
   </tbody>
 </table>
 
-<%= link_to "編集する", edit_admin_customer_path(@customer) %>
-<%= link_to "注文履歴一覧を見る", admin_admin_path%>
+<%= link_to "編集する", edit_admin_customer_path(@customer),class: "btn btn-success" %>
+<%= link_to "注文履歴一覧を見る", admin_admin_path, class: "btn btn-primary"%>
+</div>
+<div class="col-lg-6">
+</div>
+ </div>
+</div>
