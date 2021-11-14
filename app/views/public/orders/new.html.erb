@@ -1,42 +1,43 @@
-<h4>注文情報入力</h4>
+<h4><strong>注文情報入力</strong></h4>
 
 <%= form_with model: @order,url: orders_verification_path, local:true do |f| %>
-<h4>支払方法</h4>
+  <h4>
+    <strong>支払方法</strong>
+  </h4>
   <%= f.radio_button :payment_method, :credit_card %>
-  <%= f.label :payment_method, "クレジットカート", {value: :credit, style: "display: inline-block;"} %>
+  <%= f.label :payment_method, "クレジットカート", {value: :credit, style: "display: inline-block;"} %><br>
   <%= f.radio_button :payment_method, :transfer %>
   <%= f.label :payment_method, "銀行振込", {value: :transfer , style: "display: inline-block;"} %>
-<h4>お届け先</h4>
-<ul>
-  <li>
+  <h4>
+    <strong>お届け先</strong>
+  </h4>
+
     <%= f.radio_button :address_select, 1%>
     <%= f.label :address_select, "ご自身の住所", {value: :address, style: "display: inline-block;"} %>
-   〒 <%= current_customer.postal_code %><%= current_customer.address%> <%= current_customer.fullname%>
-  </li>
-  <li>
+   〒 <%= current_customer.postal_code %><%= current_customer.address%> <%= current_customer.fullname%><br>
+
     <%= f.radio_button :address_select, 2%>
     <%= f.label :address_select, "登録済住所から選択", {value: :address, style: "display: inline-block;"} %>
-    <%=f.collection_select :select_address, @addresses, :id, :view_dear_address, { prompt: "選択してください" } %>
-  </li>
-  <li>
+    <%=f.collection_select :select_address, @addresses, :id, :view_dear_address, { prompt: "選択してください" } %><br>
+
      <%= f.radio_button :address_select, 3%>
-    <%= f.label :address_select, "新しいお届け先", {value: :address, style: "display: inline-block;"} %>
+    <%= f.label :address_select, "新しいお届け先", {value: :address, style: "display: inline-block;"} %><br>
     <table>
       <tr>
         <td>郵便番号（ハイフンなし）</td>
-        <td><%= f.text_field :postal_code%></td>
+        <td><%= f.text_field :postal_code, :placeholder => "0000000"%></td>
       </tr>
       <tr>
         <td>住所</td>
-        <td><%= f.text_field :address%></td>
+        <td><%= f.text_field :address, :placeholder => "東京都..."%></td>
       </tr>
       <tr>
         <td>宛名</td>
-        <td><%= f.text_field :name%></td>
+        <td><%= f.text_field :name,:placeholder => "令和道子..."%></td>
       </tr>
     </table>
   </li>
 </ul>
-<%= f.submit "確認画面へ進む"%>
+<%= f.submit "確認画面へ進む",  class: "btn btn-primary"%>
 <% end %>
 

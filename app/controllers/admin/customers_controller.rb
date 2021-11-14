@@ -1,6 +1,6 @@
 class Admin::CustomersController < ApplicationController
   def index
-    @customer = Customer.all
+    @customers = Customer.page(params[:page])
   end
 
   def show
@@ -16,11 +16,10 @@ class Admin::CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to admin_customer_path(@customer.id)
     end
+  end
 
     private
     def customer_params
       params.require(:customer).permit(:id,:first_name,:last_name,:first_name_kana,:last_name_kana,:postal_code,:address,:telephone_number,:email,:is_deleted)
     end
-
-  end
 end

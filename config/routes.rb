@@ -19,10 +19,11 @@ Rails.application.routes.draw do
        get 'admin' => 'homes#top'
        resources :items, except: [:destroy]
        resources :genres, only: [:index, :create, :edit, :update]
-       resources :orders, only: [:show]
+       resources :orders, only: [:show,:update]
        resources :order_details, only: [:update]
    end
    scope module: :public do
+     resources :cart_items, only: [:index, :create, :update, :destroy]
      get 'about' => 'homes#about'
      resources :items, only: [:index, :show]
      get 'customers' => 'customers#show'
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
      get 'customers/withdraw' => 'customers#withdraw'
      patch 'customers/withdraw_update' => 'customers#withdsraw_update'
      delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
-     resources :cart_items, only: [:index, :create, :update, :destroy]
+
      get 'orders/thanks' => 'orders#thanks'
      post 'orders/verification' => 'orders#verification'
      resources :orders, only: [:new, :show, :index, :create]

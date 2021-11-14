@@ -7,7 +7,7 @@
     <%= form_with model: @genre, url:admin_genres_path, local: true do |f|%>
       <tr>
         <td><%= f.label :ジャンル名 %><td>
-        <td><%= f.text_field :name, autofocus: true %></td>
+        <td><%= f.text_field :name, :placeholder => "ジャンル名" ,autofocus: true %></td>
         <td><%= f.submit "新規登録",class: "btn btn-success" %></td>
       </tr>
     <% end %>
@@ -16,21 +16,19 @@
 
 
 <table class="table">
-  <thead class="thead-dark">ジャンル</thead>
+  <thead class="thead-dark"><strong>ジャンル</strong></thead>
   <tbody>
     <% @genres.each do |genre|%>
       <tr>
         <td>
          <%= genre.name%>
         </td>
-        <td><%= link_to "編集する", edit_admin_genre_path(genre) %> </td>
+        <td><%= link_to "編集する", edit_admin_genre_path(genre) ,class: "btn btn-success"%> </td>
       </tr>
     <% end %>
   </tbody>
   </table>
   </div>
-
-  <div class="col-lg-8"></div>
 
   </div>
 </div>

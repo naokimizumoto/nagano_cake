@@ -1,41 +1,42 @@
 <h4>注文履歴詳細</h4>
-
+<%= form_with model: @order, url: admin_order_path, local: true do |f| %>
 <table>
   <tbody>
    <tr>
-     <td>購入者</td>
-     <% link_to admin_customer_path(@order.customer.id) %>
+     <td><strong>購入者</strong></td>
+     <% link_to admin_customer_path(current_customer.id) %>
      <td><%=@order.customer.fullname%></td>
      <% end %>
    </tr>
    <tr>
-     <td>注文日</td>
+     <td><strong>注文日</strong></td>
      <td><%=@order.created_at%></td>
    </tr>
    <tr>
-     <td>配送先</td>
+     <td><strong>配送先</strong></td>
      <td><%=@order.address%></td>
    </tr>
    <tr>
-     <td>支払方法</td>
+     <td><strong>支払方法</strong></td>
      <td><%=@order.payment_method%></td>
    </tr>
    <tr>
-     <td>注文ステータス</td>
-     <td><%= form.select :status, Address.statuses.keys, {prompt: "選択してください"}, class: "status-select" %></td>
-     <td><%=link_to "更新" admin_order_path(@order.id), %></td>
+     <td><strong>注文ステータス</strong></td>
+     <td><%= f.select :status, {'入金待ち': 0, '入金確認': 1, '制作中': 2, '発送準備中': 3,'発送済み': 4}, { include_blank: '選択してください'} %></td>
+     <td><%=f.submit "更新",class: "btn btn-success" %></td>
    </tr>
   </tbody>
 </table>
-
+<% end %>
+<%= form_with model: @order_details, url: admin_order_detail_path(current_customer.id), local: true do |f|%>
 <table>
   <thead>
     <tr>
-       <td>商品名</td>
-       <td>単価（税込）</td>
-       <td>数量</td>
-       <td>小計</td>
-       <td>制作ステータス</td>
+       <td><strong>商品名</strong></td>
+       <td><strong>単価（税込）</strong></td>
+       <td><strong>数量</strong></td>
+       <td><strong>小計</strong></td>
+       <td><strong>制作ステータス</strong></td>
     </tr>
   </thead>
   <tbody>
@@ -45,8 +46,8 @@
       <td><%=order_detail.price%></td>
       <td><%=order_detail.amount%></td>
       <td><%=(order_detail.price)*(order_detail.amount)%></td>
-      <td><%=form.select :making_status, Address.making_statuses.keys, {prompt: "選択してください"}, class: "making_status-select"%></td>
-      <td><%=link_to "更新", admin_order_path(@order.id)%></td>
+      <td><%=form.select :making_status, {'製作不可': 0, '製作待ち': 1, '製作中': 2, '製作管理用': 3}, { include_blank: '選択してください'}%></td>
+      <td><%=f.submit "更新", class: "btn btn-success"%></td>
       <td><%= order_detail.order.total_payment%></td>
       <td><%= order_detail.order.shipping_cost%></td>
       <td><%=(order_detail.order.total.payment)+(order_detail.order.shipping_cost)%></td>

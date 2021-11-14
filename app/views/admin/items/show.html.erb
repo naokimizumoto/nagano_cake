@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
-      <%= attachment_image_tag @item, :image, :fill, 300, 300, format: 'jpeg' %>
+      <%= attachment_image_tag @item, :image, size: "300x300", format: 'jpeg' %>
     </div>
  <table>
    <tbody>
@@ -25,9 +25,9 @@
      <tr>
        <td>販売ステータス</td>
        <% if @item.is_active==true %>
-       <td>販売中</td>
+       <td class="text-success">販売中</td>
 　     <% else  %>
-　     <td>販売停止中</td>
+　     <td class="text-success">販売停止中</td>
        <% end %>
      </tr>
      <tr>

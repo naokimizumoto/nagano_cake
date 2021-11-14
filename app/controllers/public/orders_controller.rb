@@ -31,7 +31,6 @@ class Public::OrdersController < ApplicationController
       address.customer_id = current_customer.id
       address.save
     end
-    @orders = Order.all
   end
 
   def thanks

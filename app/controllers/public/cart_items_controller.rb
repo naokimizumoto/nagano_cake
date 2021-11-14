@@ -1,21 +1,26 @@
 class Public::CartItemsController < ApplicationController
   def index
    @cart_items = CartItem.all
-
+   @cart_item = CartItem.new
   end
 
   def create
-    @cart_item = CartItem.new(cart_item_params)
-    puts "------------"
-    p @cart_item
-    puts "------------"
-    if @cart_item.save!
-      redirect_to cart_items_path
-    end
+     cart_item = CartItem.new(cart_item_params)
+     cart_item.customer.id = current_customer.id
+   if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+     cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+     cart_item.amount += params[:cart_item][:amount].to_i
+     cart_item.save
+     redirect_to cart_items_path
+   else
+     cart_item = current_customer.cart_items.new(cart_item_params)
+     cart_item.save
+     redirect_to cart_items_path
+   end
   end
 
 
-  def updated
+  def update
     @cart_item = CartItem.find(params[:id])
     if @cart_item.update(cart_item_params)
       redirect_to cart_items_path

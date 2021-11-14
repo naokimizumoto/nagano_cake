@@ -8,6 +8,6 @@ class Customer < ApplicationRecord
          has_many :orders
 
          def fullname
-          last_name+ first_name
+          last_name+first_name
          end
 end

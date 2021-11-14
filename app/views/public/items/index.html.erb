@@ -1,15 +1,21 @@
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
-<h2>商品一覧</h2>
-<% @items.each do |item| %>
-<div>
-  <%= link_to item_path(item.id) do %>
- <p><%= attachment_image_tag item, :image %></p>
-  <% end %>
-  <p>商品: <%= item.name%></p>
-  <p>￥：<%= item.price %></p>
+<div class="container">
+  <div class="row">
+    <h2>商品一覧</h2>
+  </div>
+    <div class="row">
+      <div class="col-md-9 offset-md-1">
+        <div class="row">
+          <% @items.each do |item| %>
+          <div class="col-md-3">
+            <%= link_to item_path(item.id) do %>
+            <p><%= attachment_image_tag item, :image, size: "200x150", format: "jap"%></p>
+            <% end %>
+            <p>商品名: <%= item.name%></p>
+            <p>￥<%= item.price %></p>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <% paginate @items%>
+    </div>
 </div>
-<% end %>
-
-

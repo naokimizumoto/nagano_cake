@@ -7,31 +7,32 @@
   <thead class="thead-light">
     <tr>
     <td><strong>会員ID</strong></td>
-    <td><strong>氏名</strong></td>
+    <td ><strong>氏名</strong></td>
     <td><strong>メールアドレス</strong></td>
     <td><strong>ステータス</strong></td>
     </tr>
   </thead>
 
   <tbody>
-      <% @customer.each do |customer| %>
+      <% @customers.each do |customer| %>
         <tr>
           <td><%=customer.id%></td>
-          <td>
-          <%= link_to admin_customer_path(customer.id) do %>
+          <td >
+          <%= link_to admin_customer_path(customer.id),class: "text-dark" do %>
           <%= customer.fullname%>
           <% end %>
           </td>
           <td><%=customer.email%></td>
           <% if customer.is_deleted!=true %>
-          <td>有効</td>
+          <td class="text-success">有効</td>
           <%else%>
-          <td>退会</td>
+          <td class="text-success">退会</td>
           <% end %>
         </tr>
       <% end %>
   </tbody>
 </table>
+ <%= paginate @customers %>
    <div class="col-lg-4"></div>
   </div>
 </div>
