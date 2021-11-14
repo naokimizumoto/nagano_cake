@@ -73,7 +73,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = current_customer.order
     @order_details = OrderDetail.find(params[:id])
   end
 

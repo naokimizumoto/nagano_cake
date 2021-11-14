@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   scope module: :public do
-   get 'customers/edit' => 'customers#edit'
+
+    get 'customers/edit' => 'customers#edit'
+    get 'customers' => 'customers#show'
   end
   devise_for :customers, controllers: {
     sessions: 'public/sessions',
@@ -27,7 +29,7 @@ Rails.application.routes.draw do
      resources :cart_items, only: [:index, :create, :update, :destroy]
      get 'about' => 'homes#about'
      resources :items, only: [:index, :show]
-     get 'customers' => 'customers#show'
+
      patch 'customers' => 'customers#update'
      get 'customers/withdraw' => 'customers#withdraw'
      patch 'customers/withdraw_update' => 'customers#withdsraw_update'

@@ -2,18 +2,18 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
+       <%= form_with model: @genre, url:admin_genres_path, local: true do |f|%>
     <table>
     <tbody>
-    <%= form_with model: @genre, url:admin_genres_path, local: true do |f|%>
       <tr>
         <td><%= f.label :ジャンル名 %><td>
         <td><%= f.text_field :name, :placeholder => "ジャンル名" ,autofocus: true %></td>
         <td><%= f.submit "新規登録",class: "btn btn-success" %></td>
       </tr>
-    <% end %>
+
   </tbody>
 </table>
-
+ <% end %>
 
 <table class="table">
   <thead class="thead-dark"><strong>ジャンル</strong></thead>
