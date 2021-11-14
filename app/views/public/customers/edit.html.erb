@@ -1,39 +1,52 @@
-<h4>会員情報編集</h4>
+<div class="container">
+  <div class="row">
+    <h4>会員情報編集</h4>
+  </div>
 
-<%= form_with model: @customer,url: customers_edit_path,local:true, method: :patch do |f| %>
- <table>
+<div class="row">
+  <div class="col-md-10">
+    <%= form_with model: @customer,url: customers_edit_path,local:true, method: :patch do |f| %>
 
-  <tbody>
-    <tr>
-      <td>氏名</td>
-      <td><%= @customer.last_name %></td>
-      <td><%= @customer.first_name %></td>
-    </tr>
-    <tr>
-      <td>カナ</td>
-      <td><%= @customer.last_name_kana%></td>
-      <td><%= @customer.first_name_kana%></td>
-    </tr>
-    <tr>
-      <td>郵便番号</td>
-      <td><%= @customer.postal_code%></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= @customer.address%></td>
-    </tr>
-    <tr>
-      <td>電話番号</td>
-      <td><%= @customer.telephone_number%></td>
-    </tr>
-    <tr>
-      <td>メールアドレス</td>
-      <td><%= @customer.email%></td>
-    </tr>
-  </tbody>
+      <div class="form row">
+        <%= f.label "氏名", class: "col-md-2 col-form-label"%>
+        <div class="form-row col-md-4">
+          <%= f.text_field :last_name, autofocus: true %>
+        </div>
+        <div class="form-row col-md-4">
+          <%= f.text_field :first_name, autofocus: true %>
+        </div>
+      </div>
 
- </table>
-<% end %>
+       <div class="form row">
+       <%= f.label "カナ", class: "col-md-2 col-form-label"%>
+        <div class="form-row col-md-4">
+      <%= f.text_field :last_name_kana, autofocus: true %>
+        </div>
+         <div class="form-row col-md-4">
+      <%= f.text_field :first_name_kana, autofocus: true %>
+      </div>
 
-<%= link_to "編集内容を保存", customers_path(@customer.id) %>
-<%= link_to "退会する", customers_withdraw_path %>
+       <div class="form row">
+       <%= f.label "ゆうびん番号", class: "col-md-2 col-form-label"%>
+       <div class="form-row col-md-4">
+      <%= f.text_field :postal_code, autofocus: true %>
+      </div>
+
+      <div class="form row">
+      <%= f.label "住所", class: "col-md-2 col-form-label"%>
+      <div class="form-row col-md-4">
+      <%= f.text_field :address, autofocus: true %>
+      </div>
+
+      電話番号
+      <%= f.text_field :telephone, autofocus: true %>
+
+      メールアドレス
+       <%= f.text_field :email, autofocus: true %>
+    <% end %>
+  </div>
+</div>
+<%= link_to "編集内容を保存", customers_path(@customer.id) ,class: "btn btn-success"%>
+<%= link_to "退会する", customers_withdraw_path,class: "btn btn-danger" %>
+
+</div>

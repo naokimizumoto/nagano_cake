@@ -1,14 +1,12 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
-
     @addresses = current_customer.addresses
   end
 
   def verification
-     @order = Order.new
-     @order.payment_method = params[:order][:payment_method]
-
+     @order = Order.new(order_params)
+     @order.shipping_cost = 800
     if params[:order][:address_select] == "1"
       @order.address = current_customer.address
       @order.name = current_customer.fullname
@@ -31,25 +29,43 @@ class Public::OrdersController < ApplicationController
       address.customer_id = current_customer.id
       address.save
     end
+    @sum=0
+    cart_items = current_customer.cart_items
+    cart_items.each do |cart_item|
+      @sum+=(cart_item.item.price*cart_item.amount)
+    end
+    @sum+=800
+    @order.total_payment=@sum
   end
 
   def thanks
   end
 
   def create
-    @order = Order.new
-    @order.customer_id = current_customer.id
-    @order.payment_method = @order.payment_method
-    @order.postal_code = current_customer.postal_code
-    @order.name = current_customer.fullname
-    @order.shipping_cost = @order.shipping_cost
-    @order.total_payment = @order.total_payment
-    @order.status = @order.status
-    @order.address = current_customer.address
-    @order.save
-    if @order.save(order_params)
-      redirect_to orders_thanks_path
+    order = Order.new(order_params)
+    order.customer_id = current_customer.id
+    order.save
+    current_customer.cart_items.each do |cart_item|
+      order_detail = order.order_details.new
+      order_detail.item_id = cart_item.item_id
+      order_detail.amount = cart_item.amount
+      order_detail.price = cart_item.item.price*1.1
+      order_detail.save
     end
+    current_customer.cart_items.destroy_all
+    redirect_to orders_thanks_path
+
+    #@order.payment_method = @order.payment_method
+    #@order.postal_code = current_customer.postal_code
+    #@order.name = current_customer.fullname
+   # @order.shipping_cost = @order.shipping_cost
+    #@order.total_payment = @order.total_payment
+    #@order.status = @order.status
+    #@order.address = current_customer.address
+    #@order.save
+    #if @order.save(order_params)
+     # redirect_to orders_thanks_path
+
   end
 
   def index
@@ -64,6 +80,6 @@ class Public::OrdersController < ApplicationController
 private
 
   def order_params
-    params.require(:order).permit(:customer_id,:payment_method,:postal_code,:name,:shipping_cost,:total_payment,:status,:address)
+    params.require(:order).permit(:payment_method,:postal_code,:name,:total_payment,:address)
   end
 end

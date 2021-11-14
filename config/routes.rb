@@ -23,6 +23,7 @@ Rails.application.routes.draw do
        resources :order_details, only: [:update]
    end
    scope module: :public do
+     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
      resources :cart_items, only: [:index, :create, :update, :destroy]
      get 'about' => 'homes#about'
      resources :items, only: [:index, :show]
@@ -30,8 +31,6 @@ Rails.application.routes.draw do
      patch 'customers' => 'customers#update'
      get 'customers/withdraw' => 'customers#withdraw'
      patch 'customers/withdraw_update' => 'customers#withdsraw_update'
-     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
-
      get 'orders/thanks' => 'orders#thanks'
      post 'orders/verification' => 'orders#verification'
      resources :orders, only: [:new, :show, :index, :create]
