@@ -4,9 +4,9 @@ Rails.application.routes.draw do
     get 'customers' => 'customers#show'
   end
   devise_for :customers, controllers: {
+    registrations: 'public/registrations',
     sessions: 'public/sessions',
-    passwords: 'public/passwords',
-    registrations: 'public/registrations'
+    passwords: 'public/passwords'
   }
   devise_for :admins, controllers: {
     sessions: 'admin/sessions',
