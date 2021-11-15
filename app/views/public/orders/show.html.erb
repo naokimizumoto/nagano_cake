@@ -2,24 +2,24 @@
 <h4>注文情報</h4>
 <table>
  <tbody>
-   <% @orders.each do |order|%>
+
      <tr>
        <td>注文日</td>
-       <td><%=order.created_at%></td>
+       <td><%=@order.created_at%></td>
      </tr>
      <tr>
        <td>配送先</td>
-       <td><%=order.address%></td>
+       <td><%=@order.address%></td>
      </tr>
      <tr>
        <td>支払方法</td>
-       <td><%=order.payment_method%></td>
+       <td><%=Order.payment_methods_i18n[:credit_card]%></td>
      </tr>
      <tr>
        <td>ステータス</td>
-       <td><%=order.status%></td>
+       <td><%=@order.status%></td>
      </tr>
-   <% end %>
+
  </tbody>
 </table>
 
@@ -48,20 +48,20 @@
 <h4>請求情報</h4>
 <table>
   <tbody>
-    <% @orders.each do |order|%>
+
     <tr>
       <td>商品合計</td>
-      <td><%=(order.order_detail.price)*(order.order_detail.amount)%></td>
+
     </tr>
     <tr>
       <td>配送料</td>
-      <td><%= order.shipping_cost%></td>
+      <td><%= @order.shipping_cost%></td>
     </tr>
     <tr>
       <td>ご請求額</td>
-      <td><%=order.total_payment%></td>
+      <td><%=@order.total_payment%></td>
     </tr>
-    <% end %>
+
   </tbody>
 </table>
 

@@ -5,6 +5,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def verification
+
      @order = Order.new(order_params)
      @order.shipping_cost = 800
     if params[:order][:address_select] == "1"
@@ -42,6 +43,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+
     order = Order.new(order_params)
     order.customer_id = current_customer.id
     order.save
@@ -69,17 +71,18 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = Order.page(params[:page])
   end
 
   def show
-    @order = current_customer.order
-    @order_details = OrderDetail.find(params[:id])
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
+
   end
 
 private
 
   def order_params
-    params.require(:order).permit(:payment_method,:postal_code,:name,:total_payment,:address)
+    params.require(:order).permit(:payment_method,:postal_code,:name,:total_payment,:address,:shipping_cost)
   end
 end

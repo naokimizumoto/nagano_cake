@@ -4,9 +4,11 @@
   <tbody>
    <tr>
      <td><strong>購入者</strong></td>
-     <% link_to admin_customer_path(current_customer.id) %>
-     <td><%=@order.customer.fullname%></td>
+     <td>
+     <%= link_to admin_customer_path(@order.customer) do %>
+     <%=@order.customer.fullname%>
      <% end %>
+     </td>
    </tr>
    <tr>
      <td><strong>注文日</strong></td>
@@ -22,13 +24,14 @@
    </tr>
    <tr>
      <td><strong>注文ステータス</strong></td>
-     <td><%= f.select :status, {'入金待ち': 0, '入金確認': 1, '制作中': 2, '発送準備中': 3,'発送済み': 4}, { include_blank: '選択してください'} %></td>
+     <td><%#= f.select :status, {'入金待ち': 0, '入金確認': 1, '制作中': 2, '発送準備中': 3,'発送済み': 4}%></td>
+   <td><%=f.select :status, Order.statuses.keys, {prompt: "選択してください"}%></td>
      <td><%=f.submit "更新",class: "btn btn-success" %></td>
    </tr>
   </tbody>
 </table>
 <% end %>
-<%= form_with model: @order_details, url: admin_order_detail_path(current_customer.id), local: true do |f|%>
+
 <table>
   <thead>
     <tr>
@@ -46,12 +49,18 @@
       <td><%=order_detail.price%></td>
       <td><%=order_detail.amount%></td>
       <td><%=(order_detail.price)*(order_detail.amount)%></td>
-      <td><%=form.select :making_status, {'製作不可': 0, '製作待ち': 1, '製作中': 2, '製作管理用': 3}, { include_blank: '選択してください'}%></td>
-      <td><%=f.submit "更新", class: "btn btn-success"%></td>
+      <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), local: true do |f|%>
+        <td><%=f.select :making_status,OrderDetail.making_statuses.keys,{prompt: "選択してください"}%></td>
+
+        <td><%=f.submit "更新", class: "btn btn-success"%></td>
+      <% end %>
+
       <td><%= order_detail.order.total_payment%></td>
       <td><%= order_detail.order.shipping_cost%></td>
-      <td><%=(order_detail.order.total.payment)+(order_detail.order.shipping_cost)%></td>
+      <td><%=(order_detail.order.total_payment).to_i+(order_detail.order.shipping_cost).to_i%></td>
     </tr>
+    <% end %>
   </tbody>
+
 </table>
 

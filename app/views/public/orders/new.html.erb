@@ -6,7 +6,7 @@
   </h4>
   <%= f.radio_button :payment_method, :credit_card ,value:1%>
   <%= f.label :payment_method, "クレジットカート" %><br>
-  <%= f.radio_button :payment_method, :bank_transfer,value: 2%>
+  <%= f.radio_button :payment_method, :bank_transfer,value: 2 %>
   <%= f.label :payment_method, "銀行振込" %>
   <h4>
     <strong>お届け先</strong>
@@ -14,7 +14,7 @@
 
     <%= f.radio_button :address_select, 1%>
     <%= f.label :address_select, "ご自身の住所", {value: :address, style: "display: inline-block;"} %>
-   〒 <%= current_customer.postal_code %><%= current_customer.address%> <%= current_customer.fullname%><br>
+    〒 <%= current_customer.postal_code %><%= current_customer.address%> <%= current_customer.fullname%><br>
 
     <%= f.radio_button :address_select, 2%>
     <%= f.label :address_select, "登録済住所から選択", {value: :address, style: "display: inline-block;"} %>

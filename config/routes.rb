@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   scope module: :public do
-
     get 'customers/edit' => 'customers#edit'
     get 'customers' => 'customers#show'
   end
@@ -29,8 +28,7 @@ Rails.application.routes.draw do
      resources :cart_items, only: [:index, :create, :update, :destroy]
      get 'about' => 'homes#about'
      resources :items, only: [:index, :show]
-
-     patch 'customers' => 'customers#update'
+    resources :customers, only: [:edit, :show, :update]
      get 'customers/withdraw' => 'customers#withdraw'
      patch 'customers/withdraw_update' => 'customers#withdsraw_update'
      get 'orders/thanks' => 'orders#thanks'
